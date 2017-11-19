@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <style>
+        #clock {
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+            font-family: '맑은 고딕', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: normal;
+            font-size: 20px;
+            text-align: center;
+            text-shadow: 0 0 6px #000;
+            background: rgba(0,0,0,0.01)
+        }
+    </style>
+
+    <script>
+        function printClock() {
+
+            var clock = document.getElementById("clock");           
+            var currentDate = new Date();                                  
+            var currentHours = addZeros(currentDate.getHours(), 2);
+            var currentMinute = addZeros(currentDate.getMinutes(), 2);
+            var currentSeconds = addZeros(currentDate.getSeconds(), 2);
+
+            /*
+            if (currentHours >= 12) { // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+                currentHours = addZeros(currentHours - 12, 2);
+            }
+            */
+
+            if (currentSeconds >= 50) {
+                currentSeconds = '<span style="color:#de1951;">' + currentSeconds + '</span>'
+            }
+            clock.innerHTML = currentHours + ":" + currentMinute + ":" + currentSeconds;           // 현재시간을 출력
+
+            setTimeout("printClock()", 1000);         // 1초마다 printClock() 함수 호출
+        }
+
+        function addZeros(num, digit) { // 자릿수 맞춰주기
+            var zero = '';
+            num = num.toString();
+            if (num.length < digit) {
+                for (i = 0; i < digit - num.length; i++) {
+                    zero += '0';
+                }
+            }
+            return zero + num;
+        }
+
+        window.onload = function () {
+            printClock();
+        }
+    </script>
+</head>
+
+<body onload="printClock()">
+    <div id="clock">
+    </div>
+</body>
+
+</html>
