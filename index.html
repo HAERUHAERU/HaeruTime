@@ -2,21 +2,16 @@
 <title>HaeruTime</title>
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <style>
-        @font-face{ 
-            font-family: 'DS-Digital'; 
-            src:url(/font/DS-DIGIB.ttf) format("ttf") 
-        }
-        #clock {
-            color: #fff;
+        @font-face {
             font-family: 'DS-Digital';
-            font-size: 24px;
-            text-align: left;
-            padding: 2px;
-            text-shadow: 0 0 3px #000;
-            background: rgba(0, 0, 0, 0.01);
-            cursor: move;
+            src: url(/font/DS-DIGIB.ttf) format("ttf")
+        }
+
+        html {
+            font-size: 62.5%;
+            -webkit-transition: .15s;
         }
 
         div {
@@ -27,19 +22,30 @@
             user-select: none;
             vertical-align: middle
         }
-    </style>
 
-    <script>
+        #clock {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.01);
+            color: #fff;
+            font-family: 'DS-Digital';
+            font-size: 2.4rem;
+            text-align: center;
+            vertical-align: middle;
+            text-shadow: 0 0 .3rem #000;
+            cursor: move;
+        }
+    </style>
+    <script>        
         function printClock() {
             var clock = document.getElementById("clock");
             var currentDate = new Date();
             var currentHours = addZeros(currentDate.getHours(), 2);
             var currentMinute = addZeros(currentDate.getMinutes(), 2);
             var currentSeconds = addZeros(currentDate.getSeconds(), 2);
-            clock.innerHTML = currentHours + ":" + currentMinute + ":" + currentSeconds;    
+            clock.innerHTML = currentHours + ":" + currentMinute + ":" + currentSeconds;
             setTimeout("printClock()", 1000);
         }
-        function addZeros(num, digit) { 
+        function addZeros(num, digit) {
             var zero = '';
             num = num.toString();
             if (num.length < digit) {
@@ -52,12 +58,35 @@
         window.onload = function () {
             printClock();
         }
+        function sizeClock(flag) {
+            var size = {
+                1: 62.5,
+                2: 75,
+                3: 100,
+                4: 125,
+                5: 150,
+                6: 175,
+                7: 200,
+                8: 225,
+                9: 250,
+                10: 300
+            }
+            if (!localStorage.getItem('size'))
+                localStorage.setItem('size', 1);
+
+            $('html').css('font-size', size[localStorage.getItem('size')] + '%');
+
+            if (flag == 1) {
+                if (localStorage.getItem('size') == 10)
+                    localStorage.setItem('size', 1);
+                else
+                    localStorage.setItem('size', parseInt(localStorage.getItem('size')) + 1);
+            }
+        }
     </script>
 </head>
 
-<body onload="printClock()">
-    <div id="clock">
-    </div>
+<body onload="printClock(); sizeClock(0);">
+    <div id="clock" ondblclick="sizeClock(1)"></div>
 </body>
-
 </html>
