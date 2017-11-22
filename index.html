@@ -12,7 +12,11 @@
 
         html {
             font-size: 62.5%;
+            -ms-transition: .15s;
+            -moz-transition: .15s;
+            -khtml-transition: .15s;
             -webkit-transition: .15s;
+            transition: .15s
         }
 
         div {
@@ -20,8 +24,7 @@
             -moz-user-select: -moz-none;
             -khtml-user-select: none;
             -webkit-user-select: none;
-            user-select: none;
-            vertical-align: middle
+            user-select: none
         }
 
         #clock {
@@ -33,7 +36,7 @@
             text-align:left;
             vertical-align: middle;
             text-shadow: 0 0 .3rem #000;
-            cursor: move;
+            cursor: move
         }
     </style>
     <script>        
