@@ -74,20 +74,19 @@
             }
             if (!localStorage.getItem('size'))
                 localStorage.setItem('size', 1);
-
-            $('html').css('font-size', size[localStorage.getItem('size')] + '%');
-
             if (flag == 1) {
                 if (localStorage.getItem('size') == 10)
                     localStorage.setItem('size', 1);
                 else
                     localStorage.setItem('size', parseInt(localStorage.getItem('size')) + 1);
             }
+            $('html').css('font-size', size[localStorage.getItem('size')] + '%');
+            
         }
     </script>
 </head>
 
-<body onload="printClock(); sizeClock(0);">
+<body onload="printClock(); sizeClock(0)">
     <div id="clock" ondblclick="sizeClock(1)"></div>
 </body>
 </html>
