@@ -16,9 +16,8 @@
             -moz-transition: .15s;
             -khtml-transition: .15s;
             -webkit-transition: .15s;
-            transition: .15s
+            transition: .15s;
         }
-
         div {
             -ms-user-select: none;
             -moz-user-select: -moz-none;
@@ -39,8 +38,9 @@
             cursor: move
         }
     </style>
-    <script>        
+    <script>       
         function printClock() {
+            $('body').css('background', 'transparent')
             var clock = document.getElementById("clock");
             var currentDate = new Date();
             var currentHours = addZeros(currentDate.getHours(), 2);
